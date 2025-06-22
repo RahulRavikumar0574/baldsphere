@@ -262,7 +262,7 @@ Type any action to see which brain regions are involved!`;
 
             {/* Input Form */}
             <form className="p-3 sm:p-4 lg:p-6 border-t bg-gray-50" onSubmit={handleSubmit}>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <input
                   type="text"
                   placeholder="Type any action: think, run, sing, cook, read..."
@@ -272,7 +272,7 @@ Type any action to see which brain regions are involved!`;
                 />
                 <button
                   type="submit"
-                  className="bg-yellow-400 text-white w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full font-semibold hover:bg-yellow-500 transition-colors flex items-center justify-center shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                  className="bg-yellow-400 text-white w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full font-bold hover:bg-yellow-500 transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg sm:text-xl lg:text-2xl hover:scale-105 active:scale-95"
                   disabled={!input.trim()}
                 >
                   →
