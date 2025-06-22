@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { query } from '../../../../lib/db';
+import { supabase } from '../../../../lib/supabase';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
@@ -16,20 +16,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user by email
-    const result = await query(`
-      SELECT id, name, email, password_hash, is_active
-      FROM users 
-      WHERE email = $1
-    `, [email]);
+    const { data: user, error: userError } = await supabase
+      .from('users')
+      .select('id, name, email, password_hash, is_active')
+      .eq('email', email)
+      .single();
 
-    if (result.rows.length === 0) {
+    if (userError || !user) {
       return NextResponse.json({
         success: false,
         error: 'Invalid email or password'
       }, { status: 401 });
     }
-
-    const user = result.rows[0];
 
     // Check if user is active
     if (!user.is_active) {
@@ -49,11 +47,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Update last login
-    await query(`
-      UPDATE users 
-      SET last_login = CURRENT_TIMESTAMP 
-      WHERE id = $1
-    `, [user.id]);
+    await supabase
+      .from('users')
+      .update({ last_login: new Date().toISOString() })
+      .eq('id', user.id);
 
     return NextResponse.json({
       success: true,
