@@ -54,7 +54,7 @@ export default function HowItWorksPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="pt-20 pb-12 bg-gradient-to-br from-yellow-50 to-yellow-100 text-center">
+      <div className="pt-28 lg:pt-32 pb-12 bg-gradient-to-br from-yellow-50 to-yellow-100 text-center">
         <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-4">How It Works</h1>
         <p className="text-lg text-gray-700 max-w-3xl mx-auto">
           Discover how BaldSphere maps your actions to specific brain regions.
