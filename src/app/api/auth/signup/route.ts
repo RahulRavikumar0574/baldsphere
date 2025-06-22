@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { query } from '../../../../lib/db';
+import { supabase } from '../../../../lib/supabase';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
@@ -33,8 +33,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = await query('SELECT id FROM users WHERE email = $1', [email]);
-    if (existingUser.rows.length > 0) {
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .single();
+
+    if (existingUser) {
       return NextResponse.json({
         success: false,
         error: 'User with this email already exists'
@@ -46,19 +51,30 @@ export async function POST(request: NextRequest) {
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
     // Create user
-    const result = await query(`
-      INSERT INTO users (name, email, password_hash)
-      VALUES ($1, $2, $3)
-      RETURNING id, name, email, created_at
-    `, [name, email, passwordHash]);
+    const { data: user, error: userError } = await supabase
+      .from('users')
+      .insert({
+        name,
+        email,
+        password_hash: passwordHash
+      })
+      .select('id, name, email, created_at')
+      .single();
 
-    const user = result.rows[0];
+    if (userError || !user) {
+      throw new Error(`Failed to create user: ${userError?.message}`);
+    }
 
     // Create default user preferences
-    await query(`
-      INSERT INTO user_preferences (user_id)
-      VALUES ($1)
-    `, [user.id]);
+    const { error: prefsError } = await supabase
+      .from('user_preferences')
+      .insert({
+        user_id: user.id
+      });
+
+    if (prefsError) {
+      console.warn('Failed to create user preferences:', prefsError.message);
+    }
 
     return NextResponse.json({
       success: true,
