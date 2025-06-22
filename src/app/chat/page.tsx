@@ -272,10 +272,11 @@ Type any action to see which brain regions are involved!`;
                 />
                 <button
                   type="submit"
-                  className="bg-yellow-400 text-white w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full font-bold hover:bg-yellow-500 transition-colors flex items-center justify-center shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-xl sm:text-2xl lg:text-3xl"
+                  className="bg-yellow-400 text-white w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full font-bold hover:bg-yellow-500 transition-colors flex items-center justify-center shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-xl sm:text-2xl lg:text-3xl leading-none"
                   disabled={!input.trim()}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  →
+                  <span className="block leading-none">→</span>
                 </button>
               </div>
             </form>
