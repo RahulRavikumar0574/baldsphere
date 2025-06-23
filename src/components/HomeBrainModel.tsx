@@ -37,7 +37,7 @@ function RotatingBrain() {
   if (!clonedScene) return null;
 
   return (
-    <group ref={meshRef} scale={0.05} position={[0, -1.5, 0]}>
+    <group ref={meshRef} scale={0.05} position={[0, -2.0, 0]}>
       <primitive object={clonedScene} />
     </group>
   );
@@ -45,7 +45,7 @@ function RotatingBrain() {
 
 export default function HomeBrainModel() {
   return (
-    <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto mb-8">
+    <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto mb-8">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
         style={{ width: '100%', height: '100%' }}
