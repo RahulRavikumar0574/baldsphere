@@ -215,8 +215,18 @@ function AuthPage() {
                   value={signupData.password}
                   onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
-                  placeholder="Create a password (min 6 characters)"
+                  placeholder="Create a strong password"
                 />
+                <div className="mt-2 text-xs text-gray-600">
+                  <p className="font-medium mb-1">Password must contain:</p>
+                  <ul className="list-disc list-inside space-y-0.5 text-gray-500">
+                    <li>At least 8 characters</li>
+                    <li>One uppercase letter (A-Z)</li>
+                    <li>One lowercase letter (a-z)</li>
+                    <li>One number (0-9)</li>
+                    <li>One special character (!@#$%^&*)</li>
+                  </ul>
+                </div>
               </div>
 
               <div>

@@ -24,11 +24,33 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Validate password length
-    if (password.length < 6) {
+    // Comprehensive password validation
+    const passwordErrors = [];
+
+    if (password.length < 8) {
+      passwordErrors.push('at least 8 characters');
+    }
+
+    if (!/[a-z]/.test(password)) {
+      passwordErrors.push('at least one lowercase letter');
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      passwordErrors.push('at least one uppercase letter');
+    }
+
+    if (!/[0-9]/.test(password)) {
+      passwordErrors.push('at least one number');
+    }
+
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      passwordErrors.push('at least one special character (!@#$%^&*()_+-=[]{}|;:,.<>?)');
+    }
+
+    if (passwordErrors.length > 0) {
       return NextResponse.json({
         success: false,
-        error: 'Password must be at least 6 characters long'
+        error: `Password must contain ${passwordErrors.join(', ')}`
       }, { status: 400 });
     }
 
