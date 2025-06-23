@@ -1,5 +1,5 @@
 // Database service for easy integration with brain visualization
-import { supabase } from './supabase';
+import { query } from './hybrid-db';
 import { ChatSession, ChatMessage, BrainActivity, User, ContactMessage } from '../types/database';
 
 export class DatabaseService {
@@ -188,23 +188,16 @@ export class DatabaseService {
     message: string,
     userId?: string
   ): Promise<ContactMessage> {
-    const { data, error } = await supabase
-      .from('contact_messages')
-      .insert({
-        user_id: userId || null,
-        name,
-        email,
-        subject,
-        message
-      })
-      .select()
-      .single();
+    const result = await query(
+      'INSERT INTO contact_messages (user_id, name, email, subject, message) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [userId || null, name, email, subject, message]
+    );
 
-    if (error || !data) {
-      throw new Error(`Failed to create contact message: ${error?.message}`);
+    if (result.rows.length === 0) {
+      throw new Error('Failed to create contact message');
     }
 
-    return data;
+    return result.rows[0];
   }
 
   static async getContactMessages(limit: number = 50, unreadOnly: boolean = false): Promise<ContactMessage[]> {

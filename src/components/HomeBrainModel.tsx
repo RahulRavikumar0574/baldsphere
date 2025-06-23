@@ -1,13 +1,14 @@
 "use client";
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
-function RotatingBrain() {
+function InteractiveBrain() {
   const meshRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF('/blue_brain.glb');
+  const [autoRotate, setAutoRotate] = useState(true);
 
   const clonedScene = scene.clone();
 
@@ -27,8 +28,9 @@ function RotatingBrain() {
     }
   }, [clonedScene]);
 
+  // Auto-rotate only when not being manually controlled
   useFrame((state) => {
-    if (meshRef.current) {
+    if (meshRef.current && autoRotate) {
       meshRef.current.rotation.y += 0.003;
       meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.03;
     }
@@ -37,9 +39,23 @@ function RotatingBrain() {
   if (!clonedScene) return null;
 
   return (
-    <group ref={meshRef} scale={0.04} position={[0, -2.3, 0]}>
-      <primitive object={clonedScene} />
-    </group>
+    <>
+      <group ref={meshRef} scale={0.04} position={[0, -2.3, 0]}>
+        <primitive object={clonedScene} />
+      </group>
+      <OrbitControls
+        enableDamping
+        dampingFactor={0.25}
+        enableZoom={true}
+        enablePan={false}
+        minDistance={3}
+        maxDistance={8}
+        onStart={() => setAutoRotate(false)}
+        onEnd={() => setAutoRotate(true)}
+        autoRotate={autoRotate}
+        autoRotateSpeed={0.5}
+      />
+    </>
   );
 }
 
@@ -56,7 +72,7 @@ export default function HomeBrainModel() {
           intensity={0.5}
         />
 
-        <RotatingBrain />
+        <InteractiveBrain />
       </Canvas>
     </div>
   );

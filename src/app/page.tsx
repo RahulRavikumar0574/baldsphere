@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import HomeBrainModel from '@/components/HomeBrainModel';
+import ParticleDesign from '@/components/ParticleDesign';
 
 // Auth Page Component
 function AuthPage() {
@@ -309,6 +310,7 @@ function AuthenticatedNavbar({ user }: { user: any }) {
 
   return (
     <nav className="fixed top-3 lg:top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95vw] lg:w-[90vw] max-w-6xl bg-white/10 rounded-xl lg:rounded-2xl shadow-lg px-4 lg:px-12 py-3 lg:py-4 flex items-center justify-between lg:gap-8 backdrop-blur border border-gray-200">
+      
       <div className="flex items-center gap-2">
         <a href="/">
           <Image
@@ -425,34 +427,35 @@ function HomePage({ user }: { user: any }) {
   );
 }
 
-// Main Component
-export default function Home() {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+// // Main Component
+// export default function Home() {
+//   const [user, setUser] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+//   useEffect(() => {
+//     const userData = localStorage.getItem('user');
+//     const isLoggedIn = localStorage.getItem('isLoggedIn');
 
-    if (userData && isLoggedIn === 'true') {
-      setUser(JSON.parse(userData));
-    }
-    setLoading(false);
-  }, []);
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading BaldSphere...</p>
-        </div>
-      </div>
-    );
-  }
+//     if (userData && isLoggedIn === 'true') {
+//       setUser(JSON.parse(userData));
+//     }
+//     setLoading(false);
+//   }, []);
+//   if (loading) {
+//     return (
+//       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+//         <div className="text-center">
+//           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
+//           <p className="text-gray-600">Loading BaldSphere...</p>
+//         </div>
+//       </div>
+//     );
+//   }
 
-  if (!user) {
-    return <AuthPage />;
-  }
+//   if (!user) {
+//     return <AuthPage />;
+//   }
 
-  return <HomePage user={user} />;
-}
+//   return <HomePage user={user} />;
+// }
+

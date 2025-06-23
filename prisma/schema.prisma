@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -12,4 +7,129 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String    @unique
+  name          String
+  password_hash String?
+  avatar_url    String?
+  is_active     Boolean   @default(true)
+  last_login    DateTime?
+  created_at    DateTime  @default(now()) @db.Timestamptz
+  updated_at    DateTime  @default(now()) @updatedAt @db.Timestamptz
+
+  chat_sessions      ChatSession[]
+  user_preferences   UserPreferences?
+  brain_region_stats BrainRegionStats[]
+  contact_messages   ContactMessage[]
+
+  @@map("users")
+}
+
+model UserPreferences {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id          String   @unique @db.Uuid
+  arrow_size       Float    @default(1.0)
+  brain_model      String   @default("Brain.glb")
+  show_debug_info  Boolean  @default(false)
+  auto_hide_arrows Boolean  @default(true)
+  preferred_theme  String   @default("light")
+  created_at       DateTime @default(now()) @db.Timestamptz
+  updated_at       DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model ChatSession {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  title      String   @default("New Brain Chat")
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now()) @db.Timestamptz
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  user             User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  chat_messages    ChatMessage[]
+  brain_activities BrainActivity[]
+
+  @@index([user_id])
+  @@index([created_at(sort: Desc)])
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  session_id    String   @db.Uuid
+  role          String 
+  content       String
+  brain_regions String[] @default([])
+  created_at    DateTime @default(now()) @db.Timestamptz
+
+  session          ChatSession     @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  brain_activities BrainActivity[]
+
+  @@index([session_id])
+  @@index([created_at])
+  @@map("chat_messages")
+}
+
+model BrainActivity {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  session_id    String   @db.Uuid
+  message_id    String   @db.Uuid
+  brain_regions String[]
+  activity_type String 
+  duration_ms   Int?
+  arrow_count   Int      @default(0)
+  created_at    DateTime @default(now()) @db.Timestamptz
+
+  session ChatSession @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  message ChatMessage @relation(fields: [message_id], references: [id], onDelete: Cascade)
+
+  @@index([session_id])
+  @@index([message_id])
+  @@index([created_at(sort: Desc)])
+  @@map("brain_activities")
+}
+
+model BrainRegionStats {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id           String   @db.Uuid
+  region_name       String
+  activation_count  Int      @default(0)
+  total_duration_ms BigInt   @default(0)
+  last_activated    DateTime @default(now()) @db.Timestamptz
+  created_at        DateTime @default(now()) @db.Timestamptz
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, region_name])
+  @@index([user_id])
+  @@index([region_name])
+  @@index([activation_count(sort: Desc)])
+  @@map("brain_region_stats")
+}
+
+model ContactMessage {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String?  @db.Uuid
+  name       String
+  email      String
+  subject    String   @default("General Inquiry")
+  message    String
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now()) @db.Timestamptz
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  user User? @relation(fields: [user_id], references: [id], onDelete: SetNull)
+
+  @@index([user_id])
+  @@index([email])
+  @@index([created_at(sort: Desc)])
+  @@index([is_read])
+  @@map("contact_messages")
 }
