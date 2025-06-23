@@ -46,7 +46,7 @@ export default function BrainModel({ highlightedRegions = [] }: { highlightedReg
       <primitive object={scene} scale={0.1} position={[0, 0, 0]} />
 
       {highlightedRegions.includes('Parietal') && (
-        <mesh position={[0, 0.15, 0]} scale={[0.025, 0.025, 0.025]} rotation={[Math.PI, 0, 0]}>
+        <mesh position={[0, 0.18, 0]} scale={[0.025, 0.025, 0.025]} rotation={[Math.PI, 0, 0]}>
           <coneGeometry args={[1, 3, 6]} />
           <meshStandardMaterial color={0xffff00} emissive={0x444400} emissiveIntensity={0.8} />
         </mesh>
