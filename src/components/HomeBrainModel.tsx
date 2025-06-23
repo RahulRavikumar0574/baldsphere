@@ -45,7 +45,7 @@ function RotatingBrain() {
 
 export default function HomeBrainModel() {
   return (
-    <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto mb-8">
+    <div className="w-80 h-64 sm:w-96 sm:h-72 md:w-[28rem] md:h-80 lg:w-[32rem] lg:h-96 mx-auto mb-8">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
         style={{ width: '100%', height: '100%' }}
