@@ -43,7 +43,7 @@ export default function BrainModel({ highlightedRegions = [] }: { highlightedReg
 
   return (
     <group>
-      <primitive object={scene} scale={0.1} position={[0, 0, 0]} />
+      <primitive object={scene} scale={0.1} position={[0, -0.05, 0]} />
 
       {highlightedRegions.includes('Parietal') && (
         <mesh position={[0, 0.18, 0]} scale={[0.025, 0.025, 0.025]} rotation={[Math.PI, 0, 0]}>
