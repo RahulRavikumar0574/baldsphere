@@ -330,12 +330,20 @@ function AuthenticatedNavbar({ user }: { user: any }) {
         <a href="/contact" className="text-gray-800 hover:text-yellow-500 transition text-sm lg:text-base">Contact</a>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-gray-700 text-sm lg:text-base hidden sm:block">Hi, {user.name}!</span>
+      <div className="flex items-center gap-3 lg:gap-4">
+        <div className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-yellow-50 to-yellow-100 px-3 lg:px-4 py-2 rounded-full border border-yellow-200">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <span className="text-gray-700 text-sm lg:text-base font-medium">
+            Hi, <span className="text-yellow-700 font-semibold">{user.name}</span>!
+          </span>
+        </div>
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-lg hover:bg-red-600 transition-colors text-xs lg:text-sm"
+          className="group bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 lg:px-5 lg:py-2.5 rounded-full hover:shadow-lg transition-all duration-200 text-xs lg:text-sm font-medium flex items-center gap-2 transform hover:scale-105"
         >
+          <svg className="w-3 h-3 lg:w-4 lg:h-4 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
           Logout
         </button>
       </div>
