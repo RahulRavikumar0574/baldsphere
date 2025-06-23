@@ -108,26 +108,26 @@ function HomePage({ user }: { user: any }) {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <a href="/chat" className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="text-3xl mb-3">💬</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Brain Chat</h3>
-              <p className="text-sm text-gray-600">Interactive AI conversations</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+            <a href="/chat" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">💬</div>
+              <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Brain Chat</h3>
+              <p className="text-xs sm:text-sm text-gray-600">Interactive AI conversations</p>
             </a>
-            <a href="/history" className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="text-3xl mb-3">📚</div>
-              <h3 className="font-semibold text-gray-900 mb-2">History</h3>
-              <p className="text-sm text-gray-600">Your chat sessions</p>
+            <a href="/history" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📚</div>
+              <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">History</h3>
+              <p className="text-xs sm:text-sm text-gray-600">Your chat sessions</p>
             </a>
-            <a href="/how-it-works" className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="text-3xl mb-3">🧠</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Learn</h3>
-              <p className="text-sm text-gray-600">How your brain works</p>
+            <a href="/how-it-works" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🧠</div>
+              <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Learn</h3>
+              <p className="text-xs sm:text-sm text-gray-600">How your brain works</p>
             </a>
-            <a href="/contact" className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="text-3xl mb-3">📞</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Contact</h3>
-              <p className="text-sm text-gray-600">Get in touch</p>
+            <a href="/contact" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📞</div>
+              <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Contact</h3>
+              <p className="text-xs sm:text-sm text-gray-600">Get in touch</p>
             </a>
           </div>
         </div>
