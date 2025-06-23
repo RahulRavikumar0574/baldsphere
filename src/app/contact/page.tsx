@@ -217,7 +217,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
-                      <p className="text-gray-600">hello@baldmann.com</p>
+                      <p className="text-gray-600">baldmann24@gmail.com</p>
                       <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
                     </div>
                   </div>
@@ -240,7 +240,7 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">Bug Reports</h3>
                       <p className="text-gray-600">Found an issue? Let us know!</p>
-                      <p className="text-sm text-gray-500">Help us improve BaldMann</p>
+                      <p className="text-sm text-gray-500">Help us improve BaldSphere</p>
                     </div>
                   </div>
                 </div>
