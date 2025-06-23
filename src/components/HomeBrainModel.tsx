@@ -37,7 +37,7 @@ function RotatingBrain() {
   if (!clonedScene) return null;
 
   return (
-    <group ref={meshRef} scale={0.05} position={[0, -2.0, 0]}>
+    <group ref={meshRef} scale={0.04} position={[0, -2.3, 0]}>
       <primitive object={clonedScene} />
     </group>
   );
