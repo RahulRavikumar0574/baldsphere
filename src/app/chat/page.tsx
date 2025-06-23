@@ -234,15 +234,15 @@ Type any action to see which brain regions are involved!`;
           </main>
 
           {/* Chat Sidebar */}
-          <aside className="w-full lg:w-80 xl:w-96 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 flex flex-col shadow-lg">
+          <aside className="w-full lg:w-80 xl:w-96 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 flex flex-col shadow-lg h-[500px] lg:h-[600px]">
             {/* Chat Header */}
-            <div className="p-3 sm:p-4 lg:p-6 border-b bg-gradient-to-r from-yellow-50 to-yellow-100">
+            <div className="p-3 sm:p-4 lg:p-6 border-b bg-gradient-to-r from-yellow-50 to-yellow-100 flex-shrink-0">
               <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">Brain Assistant</h2>
               <p className="text-xs sm:text-sm text-gray-600 mt-1">Ask me about any action!</p>
             </div>
 
             {/* Messages Container */}
-            <div className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto min-h-0 max-h-[300px] lg:max-h-none">
+            <div className="flex-1 p-3 sm:p-4 lg:p-6 overflow-y-auto min-h-0">
               <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
                 {messages.map((msg, idx) => (
                   <div
@@ -261,7 +261,7 @@ Type any action to see which brain regions are involved!`;
             </div>
 
             {/* Input Form */}
-            <form className="p-3 sm:p-4 lg:p-6 border-t bg-gray-50" onSubmit={handleSubmit}>
+            <form className="p-3 sm:p-4 lg:p-6 border-t bg-gray-50 flex-shrink-0" onSubmit={handleSubmit}>
               <div className="flex items-center gap-2">
                 <input
                   type="text"
