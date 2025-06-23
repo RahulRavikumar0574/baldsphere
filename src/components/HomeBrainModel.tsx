@@ -7,7 +7,7 @@ import * as THREE from 'three';
 
 function RotatingBrain() {
   const meshRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/blue_brain.glb');
+  const { scene } = useGLTF('/HomeBrain.glb');
 
   const clonedScene = scene.clone();
 
@@ -62,4 +62,4 @@ export default function HomeBrainModel() {
   );
 }
 
-useGLTF.preload('/blue_brain.glb');
+useGLTF.preload('/HomeBrain.glb');
