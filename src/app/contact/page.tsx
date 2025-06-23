@@ -274,7 +274,7 @@ export default function ContactPage() {
                     href="/how-it-works"
                     className="text-yellow-600 hover:text-yellow-700 font-medium text-sm transition-colors"
                   >
-                    Learn more about how BaldMann works →
+                    Learn more about how BaldSphere works →
                   </a>
                 </div>
               </div>
