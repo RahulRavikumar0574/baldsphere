@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';import Footer from '@/components/Footer';
+import Image from 'next/image';
+import Footer from '@/components/Footer';
 import HomeBrainModel from '@/components/HomeBrainModel';
 import ParticleDesign from '@/components/ParticleDesign';
 // Authenticated Navbar
@@ -16,7 +17,7 @@ function AuthenticatedNavbar({ user }: { user: any }) {
     <nav className="fixed top-3 lg:top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95vw] lg:w-[90vw] max-w-6xl bg-white/10 rounded-xl lg:rounded-2xl shadow-lg px-4 lg:px-12 py-3 lg:py-4 flex items-center justify-between lg:gap-8 backdrop-blur border border-gray-200">
       
       <div className="flex items-center gap-2">
-        <a href="/">
+        <a href="/home">
           <Image
             src="/logo.svg"
             alt="BaldSphere Logo"
@@ -29,7 +30,7 @@ function AuthenticatedNavbar({ user }: { user: any }) {
       </div>
 
       <div className="hidden md:flex gap-3 lg:gap-6">
-        <a href="/" className="text-gray-800 hover:text-yellow-500 transition text-sm lg:text-base">Home</a>
+        <a href="/home" className="text-gray-800 hover:text-yellow-500 transition text-sm lg:text-base">Home</a>
         <a href="/chat" className="text-gray-800 hover:text-yellow-500 transition text-sm lg:text-base">Chat</a>
         <a href="/how-it-works" className="text-gray-800 hover:text-yellow-500 transition text-sm lg:text-base">How It Works</a>
         <a href="/history" className="text-gray-800 hover:text-yellow-500 transition text-sm lg:text-base">History</a>
@@ -163,7 +164,11 @@ export default function Home() {
   }
 
   if (!user) {
-    return <Home />;
+    // Redirect to login page if not authenticated
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+    }
+    return null;
   }
 
   return <HomePage user={user} />;
