@@ -234,7 +234,7 @@ Type any action to see which brain regions are involved!`;
           </main>
 
           {/* Chat Sidebar */}
-          <aside className="w-full lg:w-80 xl:w-96 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 flex flex-col shadow-lg h-[500px] lg:h-[600px]">
+          <aside className="w-full lg:w-80 xl:w-96 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 flex flex-col shadow-lg h-[600px] lg:h-[750px]">
             {/* Chat Header */}
             <div className="p-3 sm:p-4 lg:p-6 border-b bg-gradient-to-r from-yellow-50 to-yellow-100 flex-shrink-0">
               <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">Brain Assistant</h2>
