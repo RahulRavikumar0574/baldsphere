@@ -53,7 +53,7 @@ export default function BrainModel({ highlightedRegions = [] }: { highlightedReg
       )}
 
       {highlightedRegions.includes('Frontal') && (
-        <mesh position={[0, 0.02, 0.12]} scale={[0.02, 0.02, 0.02]} rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh position={[0, 0.06, 0.12]} scale={[0.02, 0.02, 0.02]} rotation={[-Math.PI / 2, 0, 0]}>
           <coneGeometry args={[1, 3, 6]} />
           <meshStandardMaterial color={0x0066ff} emissive={0x002244} emissiveIntensity={0.8} />
         </mesh>
