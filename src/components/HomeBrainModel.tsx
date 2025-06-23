@@ -82,6 +82,8 @@ function InteractiveBrain({ isMobile }: { isMobile: boolean }) {
 
 export default function HomeBrainModel() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -91,6 +93,15 @@ export default function HomeBrainModel() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Simulate loading time for brain model
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Responsive camera settings
@@ -107,12 +118,36 @@ export default function HomeBrainModel() {
     };
   };
 
+  if (hasError) {
+    return (
+      <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 flex items-center justify-center bg-gray-100 rounded-lg">
+        <div className="text-center text-gray-600">
+          <div className="text-4xl mb-2">🧠</div>
+          <p className="text-sm">Brain model unavailable</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8">
+    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 relative">
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-lg z-10">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500 mx-auto mb-2"></div>
+            <p className="text-sm text-gray-600">Loading brain model...</p>
+          </div>
+        </div>
+      )}
       <Canvas
         camera={getCameraSettings()}
         style={{ width: '100%', height: '100%' }}
         dpr={[1, 2]} // Responsive pixel ratio
+        onCreated={() => setIsLoading(false)}
+        onError={() => {
+          setHasError(true);
+          setIsLoading(false);
+        }}
       >
         <ambientLight intensity={isMobile ? 0.9 : 0.8} />
         <directionalLight

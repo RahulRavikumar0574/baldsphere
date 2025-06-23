@@ -96,35 +96,59 @@ function HomePage({ user }: { user: any }) {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16">
             <a
               href="/chat"
-              className="bg-yellow-400 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-yellow-500 transition-colors shadow-lg"
+              className="bg-yellow-400 text-black px-6 sm:px-8 py-4 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-yellow-500 active:bg-yellow-600 transition-colors shadow-lg touch-manipulation min-h-[48px] flex items-center justify-center"
+              role="button"
+              aria-label="Start exploring brain activities"
             >
               Start Exploring →
             </a>
             <a
               href="/how-it-works"
-              className="border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:border-yellow-400 hover:text-yellow-600 transition-colors"
+              className="border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-4 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:border-yellow-400 hover:text-yellow-600 active:border-yellow-500 active:text-yellow-700 transition-colors touch-manipulation min-h-[48px] flex items-center justify-center"
+              role="button"
+              aria-label="Learn how BaldSphere works"
             >
               How It Works
             </a>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
-            <a href="/chat" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <a
+              href="/chat"
+              className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg active:shadow-xl transition-shadow touch-manipulation min-h-[100px] flex flex-col items-center justify-center text-center"
+              role="button"
+              aria-label="Go to Brain Chat"
+            >
               <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">💬</div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Brain Chat</h3>
               <p className="text-xs sm:text-sm text-gray-600">Interactive AI conversations</p>
             </a>
-            <a href="/history" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <a
+              href="/history"
+              className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg active:shadow-xl transition-shadow touch-manipulation min-h-[100px] flex flex-col items-center justify-center text-center"
+              role="button"
+              aria-label="View chat history"
+            >
               <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📚</div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">History</h3>
               <p className="text-xs sm:text-sm text-gray-600">Your chat sessions</p>
             </a>
-            <a href="/how-it-works" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <a
+              href="/how-it-works"
+              className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg active:shadow-xl transition-shadow touch-manipulation min-h-[100px] flex flex-col items-center justify-center text-center"
+              role="button"
+              aria-label="Learn how it works"
+            >
               <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🧠</div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Learn</h3>
               <p className="text-xs sm:text-sm text-gray-600">How your brain works</p>
             </a>
-            <a href="/contact" className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <a
+              href="/contact"
+              className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg active:shadow-xl transition-shadow touch-manipulation min-h-[100px] flex flex-col items-center justify-center text-center"
+              role="button"
+              aria-label="Contact us"
+            >
               <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📞</div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Contact</h3>
               <p className="text-xs sm:text-sm text-gray-600">Get in touch</p>
