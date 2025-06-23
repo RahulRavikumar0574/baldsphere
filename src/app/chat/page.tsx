@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import brainData from "../../myBrainData";
-import BrainCanvas from '@/components/BrainCanvas';
+import BrainCanvas, { BrainCanvasRef } from '@/components/BrainCanvas';
 import { BrainDataItem } from '../../types';
 import {
   ChatSession,
@@ -22,6 +22,7 @@ export default function ChatPage() {
   const [currentSession, setCurrentSession] = useState<ChatSession | null>(null);
   const [user, setUser] = useState<any>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const brainCanvasRef = useRef<BrainCanvasRef>(null);
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -204,6 +205,14 @@ Type any action to see which brain regions are involved!`;
     setInput("");
   }
 
+  // Reset function for both arrows and camera position
+  const handleReset = () => {
+    setHighlightedRegions([]); // Clear highlighted regions/arrows
+    if (brainCanvasRef.current) {
+      brainCanvasRef.current.resetCamera(); // Reset camera position and zoom
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
@@ -216,14 +225,14 @@ Type any action to see which brain regions are involved!`;
             <div className="w-full h-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden relative">
               {/* Brain Canvas Container */}
               <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px]">
-                <BrainCanvas highlightedRegions={highlightedRegions} />
+                <BrainCanvas ref={brainCanvasRef} highlightedRegions={highlightedRegions} />
               </div>
 
               {/* Reset Button */}
               <button
-                onClick={() => setHighlightedRegions([])}
+                onClick={handleReset}
                 className="absolute bottom-4 right-4 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-md hover:shadow-lg border border-gray-200 flex items-center gap-2"
-                title="Reset brain model"
+                title="Reset brain model and camera position"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
