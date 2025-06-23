@@ -70,11 +70,11 @@ function HomePage({ user }: { user: any }) {
             
           <div className="mb-6 sm:mb-8">
             
-            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg z-10 ">
-                <div className="absolute inset-0 overflow-hidden rounded-lg">
+            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg relative z-10">
+                <div className="absolute inset-0 overflow-hidden rounded-lg z-0">
                 <ParticleDesign />
               </div>
-              <p className="text-yellow-800">
+              <p className="text-yellow-800 relative z-10">
                 <span className="font-semibold">Welcome back, {user.name}!</span>
                 <span className="ml-2">Ready to explore your brain? 🧠</span>
               </p>
@@ -93,10 +93,10 @@ function HomePage({ user }: { user: any }) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16 relative z-20">
             <a
               href="/chat"
-              className="bg-yellow-400 text-black px-6 sm:px-8 py-4 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-yellow-500 active:bg-yellow-600 transition-colors shadow-lg touch-manipulation min-h-[48px] flex items-center justify-center"
+              className="bg-yellow-400 text-black px-6 sm:px-8 py-4 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-yellow-500 active:bg-yellow-600 transition-colors shadow-lg touch-manipulation min-h-[48px] flex items-center justify-center relative z-30"
               role="button"
               aria-label="Start exploring brain activities"
             >
@@ -104,7 +104,7 @@ function HomePage({ user }: { user: any }) {
             </a>
             <a
               href="/how-it-works"
-              className="border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-4 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:border-yellow-400 hover:text-yellow-600 active:border-yellow-500 active:text-yellow-700 transition-colors touch-manipulation min-h-[48px] flex items-center justify-center"
+              className="border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-4 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:border-yellow-400 hover:text-yellow-600 active:border-yellow-500 active:text-yellow-700 transition-colors touch-manipulation min-h-[48px] flex items-center justify-center relative z-30"
               role="button"
               aria-label="Learn how BaldSphere works"
             >
@@ -112,7 +112,7 @@ function HomePage({ user }: { user: any }) {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto relative z-20">
             <a
               href="/chat"
               className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg active:shadow-xl transition-shadow touch-manipulation min-h-[100px] flex flex-col items-center justify-center text-center"

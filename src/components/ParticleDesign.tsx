@@ -1,15 +1,30 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
 
 const ParticlesBackground = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0">
+    <div
+      className="absolute inset-0 w-full h-full z-0"
+      style={{ pointerEvents: 'none' }}
+    >
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -20,7 +35,7 @@ const ParticlesBackground = () => {
           },
           particles: {
             number: {
-              value: 100,
+              value: isMobile ? 50 : 100, // Fewer particles on mobile for performance
               density: {
                 enable: true,
                 value_area: 800,
@@ -38,7 +53,7 @@ const ParticlesBackground = () => {
             },
             move: {
               enable: true,
-              speed: 0.7,
+              speed: isMobile ? 0.5 : 0.7, // Slower on mobile
               direction: "none",
               outModes: "out",
             },
@@ -47,7 +62,7 @@ const ParticlesBackground = () => {
             },
             links: {
               enable: true,
-              distance: 120,
+              distance: isMobile ? 80 : 120, // Shorter links on mobile
               color: "#f0b100",
               opacity: 0.3,
               width: 1,
@@ -55,8 +70,8 @@ const ParticlesBackground = () => {
           },
           interactivity: {
             events: {
-              onHover: { enable: true, mode: "repulse" },
-              onClick: { enable: true, mode: "push" },
+              onHover: { enable: !isMobile, mode: "repulse" }, // Disable on mobile
+              onClick: { enable: !isMobile, mode: "push" }, // Disable on mobile
             },
             modes: {
               repulse: { distance: 100 },
@@ -65,6 +80,7 @@ const ParticlesBackground = () => {
           },
           detectRetina: true,
         }}
+        style={{ pointerEvents: 'none' }}
       />
     </div>
   );
