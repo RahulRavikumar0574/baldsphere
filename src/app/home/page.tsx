@@ -88,7 +88,7 @@ function HomePage({ user }: { user: any }) {
               Type any activity and see it visualized in an interactive 3D brain model.
             </p>
 
-            <div className="mb-8 sm:mb-12">
+            <div className="mb-8 sm:mb-12 relative z-20">
               <HomeBrainModel />
             </div>
           </div>

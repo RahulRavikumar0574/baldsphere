@@ -7,7 +7,7 @@ import * as THREE from 'three';
 
 function InteractiveBrain({ isMobile }: { isMobile: boolean }) {
   const meshRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/blue_brain.glb');
+  const { scene } = useGLTF('/HomeBrain.glb');
   const [autoRotate, setAutoRotate] = useState(true);
   const { viewport } = useThree();
 
@@ -120,7 +120,7 @@ export default function HomeBrainModel() {
 
   if (hasError) {
     return (
-      <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 flex items-center justify-center bg-gray-100 rounded-lg">
+      <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-sm border border-gray-200">
         <div className="text-center text-gray-600">
           <div className="text-4xl mb-2">🧠</div>
           <p className="text-sm">Brain model unavailable</p>
@@ -130,7 +130,7 @@ export default function HomeBrainModel() {
   }
 
   return (
-    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 relative">
+    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-lg z-10">
           <div className="text-center">
@@ -141,7 +141,7 @@ export default function HomeBrainModel() {
       )}
       <Canvas
         camera={getCameraSettings()}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', background: 'transparent' }}
         dpr={[1, 2]} // Responsive pixel ratio
         onCreated={() => setIsLoading(false)}
         onError={() => {
@@ -161,4 +161,4 @@ export default function HomeBrainModel() {
   );
 }
 
-useGLTF.preload('/blue_brain.glb');
+useGLTF.preload('/HomeBrain.glb');
