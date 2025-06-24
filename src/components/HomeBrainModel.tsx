@@ -24,9 +24,9 @@ function InteractiveBrain({ isMobile }: { isMobile: boolean }) {
   // Responsive position based on viewport
   const getResponsivePosition = (): [number, number, number] => {
     if (isMobile) {
-      return [0, -2.0, 0]; // Higher position on mobile
+      return [0, 0.2, 0]; // Very high position on mobile
     }
-    return [0, -2.3, 0]; // Lower position on desktop
+    return [0, 0, 0]; // Center/very high position on desktop
   };
 
   useEffect(() => {
@@ -69,8 +69,8 @@ function InteractiveBrain({ isMobile }: { isMobile: boolean }) {
         dampingFactor={0.25}
         enableZoom={true}
         enablePan={false}
-        minDistance={isMobile ? 2.5 : 3}
-        maxDistance={isMobile ? 6 : 8}
+        minDistance={isMobile ? 4.5 : 5}
+        maxDistance={isMobile ? 10 : 12}
         onStart={() => setAutoRotate(false)}
         onEnd={() => setAutoRotate(true)}
         autoRotate={autoRotate}
@@ -108,19 +108,19 @@ export default function HomeBrainModel() {
   const getCameraSettings = () => {
     if (isMobile) {
       return {
-        position: [0, 0, 4] as [number, number, number],
-        fov: 60
+        position: [0, 0, 6.5] as [number, number, number],
+        fov: 70
       };
     }
     return {
-      position: [0, 0, 5] as [number, number, number],
-      fov: 50
+      position: [0, 0, 7.5] as [number, number, number],
+      fov: 60
     };
   };
 
   if (hasError) {
     return (
-      <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-sm border border-gray-200">
+      <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 flex items-center justify-center">
         <div className="text-center text-gray-600">
           <div className="text-4xl mb-2">🧠</div>
           <p className="text-sm">Brain model unavailable</p>
@@ -130,9 +130,9 @@ export default function HomeBrainModel() {
   }
 
   return (
-    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 relative">
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-lg z-10">
+        <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500 mx-auto mb-2"></div>
             <p className="text-sm text-gray-600">Loading brain model...</p>
