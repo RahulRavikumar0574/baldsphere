@@ -69,8 +69,10 @@ function InteractiveBrain({ isMobile }: { isMobile: boolean }) {
         dampingFactor={0.25}
         enableZoom={true}
         enablePan={false}
-        minDistance={isMobile ? 4.5 : 5}
-        maxDistance={isMobile ? 10 : 12}
+        minDistance={isMobile ? 7.5 : 8.5} // Increased minimum distance to prevent zooming too close
+        maxDistance={isMobile ? 12 : 15} // Increased maximum distance
+        minPolarAngle={Math.PI / 6} // Limit vertical rotation to prevent flipping
+        maxPolarAngle={Math.PI - Math.PI / 6} // Limit vertical rotation to prevent flipping
         onStart={() => setAutoRotate(false)}
         onEnd={() => setAutoRotate(true)}
         autoRotate={autoRotate}
@@ -108,19 +110,19 @@ export default function HomeBrainModel() {
   const getCameraSettings = () => {
     if (isMobile) {
       return {
-        position: [0, 0, 6.5] as [number, number, number],
+        position: [0, 0, 8] as [number, number, number], // Increased distance
         fov: 70
       };
     }
     return {
-      position: [0, 0, 7.5] as [number, number, number],
+      position: [0, 0, 9] as [number, number, number], // Increased distance
       fov: 60
     };
   };
 
   if (hasError) {
     return (
-      <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 flex items-center justify-center">
+      <div className="w-full max-w-md h-80 xs:max-w-lg xs:h-96 sm:max-w-xl sm:h-[28rem] md:max-w-2xl md:h-[32rem] lg:max-w-3xl lg:h-[36rem] xl:max-w-4xl xl:h-[40rem] mx-auto mb-6 sm:mb-8 flex items-center justify-center">
         <div className="text-center text-gray-600">
           <div className="text-4xl mb-2">🧠</div>
           <p className="text-sm">Brain model unavailable</p>
@@ -130,7 +132,7 @@ export default function HomeBrainModel() {
   }
 
   return (
-    <div className="w-full max-w-xs h-48 xs:max-w-sm xs:h-56 sm:max-w-md sm:h-64 md:max-w-lg md:h-72 lg:max-w-xl lg:h-80 xl:max-w-2xl xl:h-96 mx-auto mb-6 sm:mb-8 relative">
+    <div className="w-full max-w-md h-80 xs:max-w-lg xs:h-96 sm:max-w-xl sm:h-[28rem] md:max-w-2xl md:h-[32rem] lg:max-w-3xl lg:h-[36rem] xl:max-w-4xl xl:h-[40rem] mx-auto mb-6 sm:mb-8 relative">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="text-center">

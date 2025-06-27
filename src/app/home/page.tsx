@@ -61,25 +61,20 @@ function AuthenticatedNavbar({ user }: { user: any }) {
 // Home Page Component
 function HomePage({ user }: { user: any }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 z-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 z-50 relative">
+      {/* Particle Background */}
+      <div className="absolute inset-0 z-0">
+        <ParticleDesign />
+      </div>
+      
       <AuthenticatedNavbar user={user} />
         
-      <main className="pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8">
+      <main className="pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="max-w-6xl mx-auto text-center">
             
           <div className="mb-6 sm:mb-8">
             
-            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg relative z-10">
-                <div className="absolute inset-0 overflow-hidden rounded-lg z-0">
-                <ParticleDesign />
-              </div>
-              <p className="text-yellow-800 relative z-10">
-                <span className="font-semibold">Welcome back, {user.name}!</span>
-                <span className="ml-2">Ready to explore your brain? 🧠</span>
-              </p>
-            </div>
-
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
               Explore Your <span className="text-yellow-500">Brain</span>
             </h1>
@@ -119,7 +114,9 @@ function HomePage({ user }: { user: any }) {
               role="button"
               aria-label="Go to Brain Chat"
             >
-              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">💬</div>
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
+                <Image src="/Chat-icon.svg" alt="Chat" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
+              </div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Brain Chat</h3>
               <p className="text-xs sm:text-sm text-gray-600">Interactive AI conversations</p>
             </a>
@@ -129,7 +126,9 @@ function HomePage({ user }: { user: any }) {
               role="button"
               aria-label="View chat history"
             >
-              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📚</div>
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
+                <Image src="/History.svg" alt="History" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
+              </div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">History</h3>
               <p className="text-xs sm:text-sm text-gray-600">Your chat sessions</p>
             </a>
@@ -139,7 +138,9 @@ function HomePage({ user }: { user: any }) {
               role="button"
               aria-label="Learn how it works"
             >
-              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🧠</div>
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
+                <Image src="/Learn.svg" alt="Learn" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
+              </div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Learn</h3>
               <p className="text-xs sm:text-sm text-gray-600">How your brain works</p>
             </a>
@@ -149,7 +150,9 @@ function HomePage({ user }: { user: any }) {
               role="button"
               aria-label="Contact us"
             >
-              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📞</div>
+              <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
+                <Image src="/Contact.svg" alt="Contact" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
+              </div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Contact</h3>
               <p className="text-xs sm:text-sm text-gray-600">Get in touch</p>
             </a>

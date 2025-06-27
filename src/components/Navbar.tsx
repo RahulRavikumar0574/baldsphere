@@ -36,6 +36,14 @@ export default function Navbar() {
           <Link href="/how-it-works" className="text-gray-800 hover:text-yellow-500 transition text-base font-medium">How It Works</Link>
           <Link href="/history" className="text-gray-800 hover:text-yellow-500 transition text-base font-medium">History</Link>
           <Link href="/contact" className="text-gray-800 hover:text-yellow-500 transition text-base font-medium">Contact</Link>
+          <a 
+            href="https://yellow-wallaby-804510.hostingersite.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-800 hover:text-yellow-500 transition text-base font-medium"
+          >
+            BaldMann
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -70,10 +78,11 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/chat"
-                className="text-gray-800 hover:text-yellow-500 transition text-lg font-medium py-2 px-4 rounded-lg hover:bg-yellow-50"
+                className="text-gray-800 hover:text-yellow-500 transition text-lg font-medium py-2 px-4 rounded-lg hover:bg-yellow-50 flex items-center gap-2"
                 onClick={closeMenu}
               >
-                💬 Chat
+                <Image src="/chat-icon.svg" alt="Chat" width={20} height={20} className="w-5 h-5" />
+                Chat
               </Link>
               <Link
                 href="/how-it-works"
@@ -96,6 +105,15 @@ export default function Navbar() {
               >
                 📞 Contact
               </Link>
+              <a
+                href="https://yellow-wallaby-804510.hostingersite.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-800 hover:text-yellow-500 transition text-lg font-medium py-2 px-4 rounded-lg hover:bg-yellow-50"
+                onClick={closeMenu}
+              >
+                👨‍💻 BaldMann
+              </a>
             </div>
           </div>
         </div>

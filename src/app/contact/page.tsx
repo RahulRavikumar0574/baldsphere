@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -19,13 +20,15 @@ export default function ContactPage() {
   useEffect(() => {
     // Check if user is logged in
     const userData = localStorage.getItem('user');
-    if (userData) {
-      const parsedUser = JSON.parse(userData);
-      setUser(parsedUser);
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    
+    if (userData && isLoggedIn === 'true') {
+      const user = JSON.parse(userData);
+      setUser(user);
       setFormData(prev => ({
         ...prev,
-        name: parsedUser.name || '',
-        email: parsedUser.email || ''
+        name: user.name || '',
+        email: user.email || ''
       }));
     }
   }, []);
@@ -34,58 +37,47 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess(false);
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          userId: user?.id || null
-        })
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (response.ok) {
         setSuccess(true);
-        setFormData({
-          name: user?.name || '',
-          email: user?.email || '',
-          subject: '',
-          message: ''
-        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        setError(result.error || 'Failed to send message');
+        const errorData = await response.json();
+        setError(errorData.error || 'Failed to send message');
       }
-    } catch (error) {
-      setError('Network error occurred');
+    } catch (err) {
+      setError('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Navbar />
       
       {/* Hero Section */}
-      <div className="pt-20 lg:pt-24 pb-8 sm:pb-12 bg-gradient-to-br from-yellow-50 to-yellow-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-            Contact Us
-          </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto">
-            Have questions about BaldSphere? We'd love to hear from you!
-            Reach out to us and we'll get back to you as soon as possible.
-          </p>
-        </div>
-      </div>
+      <div className="pt-28 lg:pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Contact Us</h1>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Have questions about BaldSphere? Want to report a bug or suggest a feature? 
+              We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
+            </p>
+          </div>
 
-      {/* Contact Content */}
-      <div className="flex-1 py-8 sm:py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Form */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
@@ -212,8 +204,8 @@ export default function ContactPage() {
                 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-xl">📧</span>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: '#edd4f0' }}>
+                      <Image src="/Mail.svg" alt="Email" width={24} height={24} className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
@@ -223,8 +215,8 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-xl">💬</span>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: '#edd4f0' }}>
+                      <Image src="/chat-icon.svg" alt="Chat" width={24} height={24} className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">Live Chat</h3>
@@ -234,8 +226,8 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-xl">🐛</span>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: '#edd4f0' }}>
+                      <Image src="/bug.svg" alt="Bug Report" width={24} height={24} className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">Bug Reports</h3>

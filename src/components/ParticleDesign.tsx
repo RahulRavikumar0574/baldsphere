@@ -3,7 +3,12 @@ import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
 
-const ParticlesBackground = () => {
+interface ParticleDesignProps {
+  colors?: string[];
+  linkColor?: string;
+}
+
+const ParticlesBackground = ({ colors = ["#000000"], linkColor = "#f0b100" }: ParticleDesignProps) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -58,12 +63,12 @@ const ParticlesBackground = () => {
               outModes: "out",
             },
             color: {
-              value: ["000000"], // Gold, Tomato, DodgerBlue
+              value: colors, // Use the passed colors
             },
             links: {
               enable: true,
               distance: isMobile ? 80 : 120, // Shorter links on mobile
-              color: "#f0b100",
+              color: linkColor,
               opacity: 0.3,
               width: 1,
             },
