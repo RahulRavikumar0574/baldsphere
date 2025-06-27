@@ -115,7 +115,7 @@ function HomePage({ user }: { user: any }) {
               aria-label="Go to Brain Chat"
             >
               <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
-                <Image src="/Chat-icon.svg" alt="Chat" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
+                <Image src="/chat-icon.svg" alt="Chat" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Brain Chat</h3>
               <p className="text-xs sm:text-sm text-gray-600">Interactive AI conversations</p>
@@ -151,7 +151,7 @@ function HomePage({ user }: { user: any }) {
               aria-label="Contact us"
             >
               <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
-                <Image src="/Contact.svg" alt="Contact" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
+                <Image src="/contact.svg" alt="Contact" width={60} height={60} className="w-12 h-12 sm:w-14 sm:h-14" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Contact</h3>
               <p className="text-xs sm:text-sm text-gray-600">Get in touch</p>

@@ -291,7 +291,7 @@ function AuthPage() {
               </div>
               <div className="text-center">
                 <div className="text-2xl mb-2">
-                  <Image src="/Chat-icon.svg" alt="Chat" width={32} height={32} className="w-8 h-8 mx-auto" />
+                  <Image src="/chat-icon.svg" alt="Chat" width={32} height={32} className="w-8 h-8 mx-auto" />
                 </div>
                 <p className="text-gray-700">AI Brain Chat</p>
               </div>
