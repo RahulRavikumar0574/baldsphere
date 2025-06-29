@@ -116,9 +116,22 @@ export class SupabaseDatabase {
       throw new Error('Supabase not configured. Please add your Supabase credentials to .env.local');
     }
 
-    // Simple SQL to Supabase operation mapping
     const sql = text.toLowerCase().trim();
-    
+
+    // Handle SELECT ... WHERE email = $1
+    const selectWhereEmail = sql.match(/select (.+) from (\w+) where email = \$1/);
+    if (selectWhereEmail && params && params.length === 1) {
+      const tableName = selectWhereEmail[2];
+      const columns = selectWhereEmail[1].split(',').map(s => s.trim());
+      const { data, error } = await supabaseAdmin
+        .from(tableName)
+        .select(columns.join(','))
+        .eq('email', params[0]);
+      if (error) throw error;
+      return { rows: data || [], rowCount: data?.length || 0 };
+    }
+
+    // Simple SQL to Supabase operation mapping
     // Handle simple SELECT queries
     if (sql.startsWith('select')) {
       // Extract table name from SELECT query
