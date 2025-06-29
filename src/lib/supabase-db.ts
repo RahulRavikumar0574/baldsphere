@@ -131,6 +131,19 @@ export class SupabaseDatabase {
       return { rows: data || [], rowCount: data?.length || 0 };
     }
 
+    // Handle UPDATE ... SET last_login = CURRENT_TIMESTAMP WHERE id = $1
+    const updateLastLogin = sql.match(/update (\w+) set last_login = current_timestamp where id = \$1/);
+    if (updateLastLogin && params && params.length === 1) {
+      const tableName = updateLastLogin[1];
+      const { data, error } = await supabaseAdmin
+        .from(tableName)
+        .update({ last_login: new Date().toISOString() })
+        .eq('id', params[0])
+        .select();
+      if (error) throw error;
+      return { rows: data || [], rowCount: data?.length || 0 };
+    }
+
     // Simple SQL to Supabase operation mapping
     // Handle simple SELECT queries
     if (sql.startsWith('select')) {
