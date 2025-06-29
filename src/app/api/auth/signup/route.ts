@@ -55,10 +55,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUserResult = await query(
-      'SELECT id FROM users WHERE email = $1',
-      [email]
-    );
+    let existingUserResult;
+    try {
+      existingUserResult = await query(
+        'SELECT id FROM users WHERE email = $1',
+        [email]
+      );
+      console.log('Supabase user existence check result:', existingUserResult);
+    } catch (dbError) {
+      console.error('Supabase user existence check error:', dbError);
+      return NextResponse.json({
+        success: false,
+        error: 'Database error during user existence check',
+        details: dbError instanceof Error ? dbError.message : dbError
+      }, { status: 500 });
+    }
 
     if (existingUserResult.rows.length > 0) {
       return NextResponse.json({
