@@ -144,6 +144,18 @@ export class SupabaseDatabase {
       return { rows: data || [], rowCount: data?.length || 0 };
     }
 
+    // Handle INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3) RETURNING id, name, email, created_at
+    const insertUser = sql.match(/insert into users \(name, email, password_hash\) values \(\$1, \$2, \$3\) returning id, name, email, created_at/);
+    if (insertUser && params && params.length === 3) {
+      const [name, email, password_hash] = params;
+      const { data, error } = await supabaseAdmin
+        .from('users')
+        .insert({ name, email, password_hash })
+        .select('id, name, email, created_at');
+      if (error) throw error;
+      return { rows: data || [], rowCount: data?.length || 0 };
+    }
+
     // Simple SQL to Supabase operation mapping
     // Handle simple SELECT queries
     if (sql.startsWith('select')) {
