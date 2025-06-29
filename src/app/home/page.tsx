@@ -74,7 +74,7 @@ function HomePage({ user }: { user: any }) {
         <div className="max-w-6xl mx-auto text-center">
             
           <div className="mb-6 sm:mb-8">
-            
+
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
               Explore Your <span className="text-yellow-500">Brain</span>
             </h1>

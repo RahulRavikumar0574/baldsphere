@@ -21,6 +21,7 @@ export default function ChatPage() {
   const [highlightedRegions, setHighlightedRegions] = useState<string[]>([]);
   const [currentSession, setCurrentSession] = useState<ChatSession | null>(null);
   const [user, setUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const brainCanvasRef = useRef<BrainCanvasRef>(null);
 
@@ -64,7 +65,63 @@ export default function ChatPage() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Enhanced matching function to find brain data
+  // Semantic matching function using Ollama
+  async function findBrainDataSemantic(userInput: string): Promise<{ 
+    found: BrainDataItem | null; 
+    normalized: string | null; 
+    confidence: string;
+    brainRegions: string[];
+  }> {
+    try {
+      const response = await fetch('/api/brain/semantic-match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userInput })
+      });
+
+      if (!response.ok) {
+        console.error('Semantic matching failed:', response.status);
+        // Fallback to original matching
+        const found = findBrainData(userInput);
+        return { 
+          found, 
+          normalized: found?.keyword || null, 
+          confidence: 'fallback',
+          brainRegions: found?.region || []
+        };
+      }
+
+      const data = await response.json();
+      
+      if (data.success && data.data.normalized) {
+        // Find the brain data item for the normalized word
+        const found = (brainData as BrainDataItem[]).find(
+          (item) => item.keyword.toLowerCase() === data.data.normalized.toLowerCase()
+        );
+        
+        return {
+          found: found || null,
+          normalized: data.data.normalized,
+          confidence: data.data.confidence,
+          brainRegions: data.data.brainRegions || (found?.region || [])
+        };
+      }
+
+      return { found: null, normalized: null, confidence: 'none', brainRegions: [] };
+    } catch (error) {
+      console.error('Error in semantic matching:', error);
+      // Fallback to original matching
+      const found = findBrainData(userInput);
+      return { 
+        found, 
+        normalized: found?.keyword || null, 
+        confidence: 'fallback',
+        brainRegions: found?.region || []
+      };
+    }
+  }
+
+  // Keep the original findBrainData function as fallback
   function findBrainData(userInput: string): BrainDataItem | null {
     const input = userInput.toLowerCase().trim();
 
@@ -72,7 +129,6 @@ export default function ChatPage() {
     let found = (brainData as BrainDataItem[]).find(
       (item) => {
         const keyword = item.keyword.toLowerCase();
-        // Remove parenthetical explanations for matching
         const cleanKeyword = keyword.replace(/\([^)]*\)/g, '').trim();
         return input === cleanKeyword || input === keyword;
       }
@@ -80,7 +136,7 @@ export default function ChatPage() {
 
     if (found) return found;
 
-    // Then try partial matches - user input contains keyword
+    // Then try partial matches
     found = (brainData as BrainDataItem[]).find(
       (item) => {
         const keyword = item.keyword.toLowerCase();
@@ -91,7 +147,7 @@ export default function ChatPage() {
 
     if (found) return found;
 
-    // Finally try keyword contains user input (for shorter user inputs)
+    // Finally try keyword contains user input
     found = (brainData as BrainDataItem[]).find(
       (item) => {
         const keyword = item.keyword.toLowerCase();
@@ -146,6 +202,11 @@ export default function ChatPage() {
 🎨 **Creative**: paint, write, draw, play, create
 💪 **Sports**: exercise, lift, throw, kick, catch
 
+💡 **Smart Matching**: I can understand synonyms and related words!
+   • "jogging" → finds "run"
+   • "sprinting" → finds "run" 
+   • "taking a stroll" → finds "walk"
+
 Type any action to see which brain regions are involved!`;
 
       setMessages((prev) => [
@@ -162,47 +223,83 @@ Type any action to see which brain regions are involved!`;
       return;
     }
 
-    const found = findBrainData(userInput);
-
-    if (found) {
-      setHighlightedRegions(found.region);
-    } else {
-      setHighlightedRegions([]); // Clear highlights if nothing is found
-    }
-
-    const assistantResponse = found
-      ? `The ${found.region.join(" & ")} lobe${found.region.length > 1 ? 's' : ''} are responsible for "${found.keyword.replace(/\([^)]*\)/g, '').trim()}".`
-      : `Sorry, I don't have data for "${userInput}". Try typing "help" to see examples, or try words like 'think', 'run', 'sing', 'dance', 'read', 'write', or 'listen'.`;
-
-    // Update messages state
+    // Add user message immediately
     setMessages((prev) => [
       ...prev,
-      { sender: "user", text: input },
-      { sender: "assistant", text: assistantResponse }
+      { sender: "user", text: input }
     ]);
 
-    // Save to database
-    if (user) {
-      await saveChatToDatabase(userInput, assistantResponse, found ? found.region : []);
-    }
+    // Clear input and show loading
+    setInput("");
+    setIsLoading(true);
 
-    // Save to localStorage as backup
-    if (isStorageAvailable()) {
-      let session = currentSession;
+    // Add loading message
+    setMessages((prev) => [
+      ...prev,
+      { sender: "assistant", text: " Analyzing your request... Please wait while I process this with AI semantic matching." }
+    ]);
 
-      if (!session) {
-        session = createChatSession(userInput);
+    try {
+      // Use semantic matching
+      const { found, normalized, confidence, brainRegions } = await findBrainDataSemantic(userInput);
+
+      if (found) {
+        setHighlightedRegions(brainRegions);
+      } else {
+        setHighlightedRegions([]); // Clear highlights if nothing is found
+      }
+
+      let assistantResponse: string;
+      
+      if (found) {
+        const regionText = brainRegions.join(" & ");
+        const confidenceText = confidence === 'high' ? ' (exact match)' : 
+                              confidence === 'medium' ? ' (semantic match)' : 
+                              confidence === 'fallback' ? ' (fallback match)' : '';
+        
+        assistantResponse = `The ${regionText} lobe${brainRegions.length > 1 ? 's' : ''} are responsible for "${normalized || found.keyword}"${confidenceText}.`;
+      } else {
+        assistantResponse = `Sorry, I don't have data for "${userInput}". Try typing "help" to see examples, or try words like 'think', 'run', 'sing', 'dance', 'read', 'write', or 'listen'.`;
+      }
+
+      // Replace loading message with actual response
+      setMessages((prev) => [
+        ...prev.slice(0, -1), // Remove loading message
+        { sender: "assistant", text: assistantResponse }
+      ]);
+
+      // Save to database
+      if (user) {
+        await saveChatToDatabase(userInput, assistantResponse, brainRegions);
+      }
+
+      // Save to localStorage as backup
+      if (isStorageAvailable()) {
+        let session = currentSession;
+
+        if (!session) {
+          session = createChatSession(userInput);
+          setCurrentSession(session);
+        }
+
+        session = addMessageToSession(session, "user", userInput);
+        session = addMessageToSession(session, "assistant", assistantResponse);
+
+        saveChatSession(session);
         setCurrentSession(session);
       }
 
-      session = addMessageToSession(session, "user", userInput);
-      session = addMessageToSession(session, "assistant", assistantResponse);
-
-      saveChatSession(session);
-      setCurrentSession(session);
+    } catch (error) {
+      console.error('Error processing request:', error);
+      
+      // Replace loading message with error response
+      setMessages((prev) => [
+        ...prev.slice(0, -1), // Remove loading message
+        { sender: "assistant", text: "Sorry, I encountered an error while processing your request. Please try again or use simpler terms." }
+      ]);
+    } finally {
+      setIsLoading(false);
     }
-
-    setInput("");
   }
 
   // Reset function for both arrows and camera position
@@ -244,6 +341,7 @@ Type any action to see which brain regions are involved!`;
             {/* Instructions */}
             <div className="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-gray-600 lg:hidden px-4">
               <p>💡 Try: "think", "run", "sing", "dance", "read", "write", "listen", "cook"</p>
+              <p className="mt-1 text-xs text-gray-500">Smart matching: "jogging" → "run", "sprinting" → "run"</p>
               <p className="mt-1 text-xs text-gray-500">Type "help" for more examples</p>
             </div>
 
@@ -287,17 +385,25 @@ Type any action to see which brain regions are involved!`;
                 <input
                   type="text"
                   placeholder="Type any action: think, run, sing, cook, read..."
-                  className="flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-xs sm:text-sm lg:text-base transition-all"
+                  className="flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-xs sm:text-sm lg:text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  disabled={isLoading}
                 />
                 <button
                   type="submit"
                   className="bg-yellow-400 text-white w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full font-bold hover:bg-yellow-500 transition-colors flex items-center justify-center shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-xl sm:text-2xl lg:text-3xl leading-none"
-                  disabled={!input.trim()}
+                  disabled={!input.trim() || isLoading}
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <span className="block leading-none">→</span>
+                  {isLoading ? (
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  ) : (
+                    <span className="block leading-none">→</span>
+                  )}
                 </button>
               </div>
             </form>

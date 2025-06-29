@@ -74,8 +74,8 @@ export default function ContactPage() {
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Have questions about BaldSphere? Want to report a bug or suggest a feature? 
               We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
-            </p>
-          </div>
+          </p>
+        </div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Form */}

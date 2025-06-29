@@ -1,10 +1,11 @@
 // Hybrid database service that can use both Supabase and local PostgreSQL
 import { createClient } from '@supabase/supabase-js';
 import { Pool } from 'pg';
+import { SupabaseDatabase } from './supabase-db';
 
 // Database mode configuration
 type DatabaseMode = 'local' | 'supabase' | 'hybrid';
-const DB_MODE = (process.env.DB_MODE as DatabaseMode) || 'hybrid';
+const DB_MODE = (process.env.DB_MODE as DatabaseMode) || 'supabase';
 
 // Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -159,26 +160,28 @@ export class HybridDatabase {
 
       case 'supabase':
         if (available.supabase) {
-          // For raw SQL queries on Supabase, we'd need to use the REST API or convert to Supabase operations
-          // For now, fall back to local if available
-          if (available.local) {
-            console.warn('⚠️ Raw SQL query on Supabase not supported, using local database');
-            return this.queryLocal(text, params);
-          }
-          throw new Error('Supabase raw SQL queries not supported in this implementation');
+          // Use SupabaseDatabase for Supabase operations
+          return SupabaseDatabase.query(text, params);
         }
-        throw new Error('Supabase not available');
+        throw new Error('Supabase not configured. Please add your Supabase credentials to .env.local');
 
       case 'hybrid':
       default:
-        // Try local first, then Supabase
-        if (available.local) {
+        // Try Supabase first, then local
+        if (available.supabase) {
+          try {
+            return SupabaseDatabase.query(text, params);
+          } catch (error) {
+            console.warn('⚠️ Supabase query failed, falling back to local database');
+            if (available.local) {
+              return this.queryLocal(text, params);
+            }
+            throw error;
+          }
+        } else if (available.local) {
           return this.queryLocal(text, params);
-        } else if (available.supabase) {
-          console.warn('⚠️ Local database not available, would need Supabase implementation for:', text.substring(0, 50));
-          throw new Error('Hybrid mode: Local database preferred but not available, Supabase raw SQL not implemented');
         }
-        throw new Error('No database available');
+        throw new Error('No database available. Please configure either Supabase or local PostgreSQL');
     }
   }
 

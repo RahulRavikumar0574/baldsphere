@@ -1,0 +1,416 @@
+word,Central,Frontal,Occipital,Parietal,Temporal
+affection,0,1,0,0,1
+alarm clock,0,1,0,0,1
+algorithm,0,1,0,0,0
+appetizer,0,1,0,1,0
+archery,0,1,1,1,1
+argue,0,1,0,1,1
+artificial intelligence,0,1,0,0,0
+asteroid,0,1,0,0,1
+astronaut,0,1,0,1,0
+athlete,0,1,0,0,1
+bake,0,1,0,1,1
+bathe,0,1,1,1,0
+bathtub,0,1,1,1,0
+bed,0,1,0,1,0
+beer,0,1,0,0,1
+beverage,0,1,0,1,0
+billiards,0,1,1,1,0
+biology,0,1,0,0,1
+black hole,0,1,0,0,1
+blanket,0,1,0,1,0
+Blend ,1,1,1,0,0
+bling,0,1,1,1,0
+blink,0,1,1,0,0
+blurt,0,1,0,0,1
+board games,0,1,0,1,0
+bonding,0,1,0,0,1
+bookshelf,0,1,0,1,0
+bounce,0,1,0,1,0
+box(ing),0,1,1,0,0
+brush,0,1,0,1,0
+build,0,1,0,1,0
+bungee jumping,0,0,1,1,0
+camaraderie,0,1,0,0,1
+camping,0,1,1,1,0
+car racing,0,1,1,1,1
+cartwheel,0,1,1,1,1
+cell,0,1,0,0,0
+Chase ,0,1,1,1,0
+chef,0,1,0,0,1
+chemistry,0,1,0,1,1
+chess,0,1,0,0,1
+chew,0,1,0,1,1
+child,0,1,0,0,1
+Chisel ,0,1,0,0,0
+chocolates,0,1,0,1,0
+clap,1,1,0,1,0
+clean,0,1,1,1,0
+climb,0,1,0,1,0
+closet,0,1,0,0,0
+clothes,0,1,0,0,0
+coach,0,1,0,0,1
+colleague,0,1,0,0,1
+comb,1,1,0,1,0
+comet,0,1,1,0,1
+comfort,0,1,0,0,1
+comforter,0,1,0,1,0
+communication,0,1,0,0,1
+companionship,0,1,0,0,1
+competition,0,1,0,0,1
+compromise,0,1,0,0,1
+conditioner,0,1,0,1,0
+conflict,0,1,0,0,1
+connection,0,1,0,0,1
+cook,1,1,1,1,0
+Cooking,0,1,1,1,1
+cough,0,1,0,1,0
+Crack ,0,1,1,0,0
+crawl,0,1,0,1,0
+cry,1,1,0,0,1
+cuisine,0,1,0,0,1
+curtains,0,1,1,1,0
+Cycling,0,1,1,1,1
+dance,1,1,0,0,1
+data,0,1,0,0,1
+debate,0,1,0,1,1
+dessert,0,1,0,1,0
+Dive ,1,1,1,0,0
+diving,0,1,1,1,1
+doing karate,0,1,1,1,1
+doodle,0,1,1,0,0
+dream,0,1,0,1,0
+dresser,0,1,0,0,0
+Drill ,0,1,1,1,0
+drink,0,1,0,1,1
+drive,1,1,1,1,0
+Driving ,0,1,1,1,1
+dunk,1,1,1,0,0
+eat,0,1,0,1,1
+ecology,0,1,0,0,0
+empathy,0,1,0,0,1
+encouragement,0,1,0,0,1
+endurance,0,1,0,0,0
+energy,0,1,0,0,1
+engineering,0,1,0,0,0
+evolution,0,1,0,0,1
+exercising,0,1,0,1,0
+experiment,0,1,0,0,0
+face wash,0,1,0,1,0
+fainting,0,1,0,1,0
+fall,0,0,1,1,0
+family,0,1,0,0,1
+fashion,0,1,1,0,0
+faucet,0,1,0,1,0
+feeding fish,0,1,0,1,0
+fight,0,1,0,1,1
+Figure skating,0,1,1,1,1
+fish(ing),0,0,1,1,0
+fitness,0,1,0,0,0
+Flatten ,1,1,1,0,0
+Flick ,1,1,0,0,1
+flinch,0,1,0,1,0
+flirt,0,1,0,0,1
+Float ,1,1,0,1,0
+flower,0,1,1,0,1
+forgiveness,0,1,0,0,1
+fork,0,1,0,1,0
+formula,0,1,0,0,1
+fresh,0,1,0,1,0
+friend,0,1,0,0,1
+frown,0,1,0,0,1
+galaxy,0,1,1,0,0
+game,0,1,0,1,0
+genetics,0,1,0,0,1
+giggle,0,1,0,0,1
+Glide ,1,1,1,0,0
+glitter,0,1,1,1,0
+goal,0,1,0,1,0
+gossip,0,1,0,0,1
+grab,0,1,1,1,0
+Grate ,0,1,1,0,0
+grilling,0,1,0,1,0
+Grip ,0,1,1,0,1
+groan,0,1,0,0,1
+gulp,0,1,0,1,0
+handbag,0,1,0,1,0
+hangout,0,1,0,0,1
+hardware,0,1,0,1,0
+heels,0,1,0,1,0
+help,0,1,0,0,1
+herbs,0,1,0,0,1
+hike,0,0,1,1,0
+hiking,0,1,1,1,1
+hit,0,1,1,1,0
+hit ,0,1,0,1,0
+hold,0,1,0,1,0
+Hook ,0,1,1,0,0
+hop,0,1,0,1,0
+Horse riding,0,1,1,1,1
+hug,0,1,0,1,0
+hypothesis,0,1,0,0,1
+Ice hockey ,0,1,1,1,1
+ice skating,0,1,1,1,1
+innovation,0,1,0,0,0
+insult,0,1,0,1,1
+intimacy,0,1,0,0,1
+iron clothes,0,1,1,1,0
+Javelin throw,0,1,1,1,1
+jewelry,0,1,0,1,0
+jog,0,0,1,1,0
+joke,1,1,0,0,1
+journaling,0,1,0,0,1
+juggle,0,1,1,1,0
+juice,0,1,0,0,1
+jump,0,1,0,0,0
+kayaking,0,1,1,1,1
+kick,0,1,0,1,0
+kickboxing,0,1,1,1,1
+kiss,0,1,0,0,1
+knead,0,1,0,1,1
+Kneel ,1,1,0,0,0
+knife,0,1,0,1,0
+knitting,0,1,1,1,0
+laboratory,0,1,0,1,0
+lamp,0,1,1,1,0
+laugh,0,1,0,0,1
+laundry room,0,1,0,1,0
+Layer ,0,1,0,0,0
+leader,0,1,0,0,0
+leap,0,1,0,1,0
+learning a language,0,1,1,1,1
+lift(ing),0,1,0,1,0
+Listening ,0,1,0,1,1
+loofah,0,1,0,1,0
+loyalty,0,1,0,0,1
+machine learning,0,1,0,0,0
+make bed,0,1,1,1,1
+makeup,0,1,1,1,0
+manicure,0,1,0,1,0
+Mash ,0,1,0,0,0
+match,0,1,0,0,0
+matter,0,1,0,0,1
+mattress,0,1,0,1,0
+meal,0,1,0,1,0
+meditate,0,1,0,1,0
+mirror,0,1,1,0,0
+mountaineering,0,1,1,1,1
+nail polish,0,1,0,1,0
+nanotechnology,0,1,0,0,0
+napping,0,1,0,0,1
+nebula,0,1,0,0,1
+network,0,1,0,0,0
+nightstand,0,1,0,1,0
+nod,0,1,0,1,0
+orbit,0,1,0,0,1
+organic,0,1,0,0,1
+paint,1,1,0,0,0
+pajamas,0,1,0,1,0
+parent,0,1,0,0,1
+partner,0,1,0,0,1
+Pedalling,0,1,0,0,0
+pedicure,0,1,0,1,0
+perfume,0,1,0,1,0
+photograph,0,1,0,0,0
+photography,0,1,1,0,0
+physics,0,1,0,1,0
+pillow,0,1,1,0,0
+Pinch ,0,1,1,1,0
+planet,0,1,0,0,1
+play,0,1,0,1,0
+Playing an instrument ,0,1,1,1,1
+playing badminton,0,1,1,1,1
+playing basketball,0,1,1,1,1
+playing chess,0,1,1,1,1
+playing cricket,0,1,1,1,1
+playing football,0,1,1,1,1
+playing pickleball,0,1,1,1,1
+playing rugby,0,1,1,1,1
+playing tennis,0,1,1,1,1
+playing volleyball,0,1,1,1,1
+plunger,0,0,0,1,0
+point,0,1,1,1,0
+pottery,0,1,1,1,0
+Pound ,1,1,1,0,0
+Pour ,0,1,1,1,0
+practice,0,1,0,0,0
+procrastinate,0,1,0,1,0
+Pry ,1,1,1,0,0
+pull,0,1,0,1,0
+push,0,1,0,1,0
+puzzles,0,1,0,0,1
+quantum,0,1,0,0,0
+reading,0,1,1,1,1
+referee,0,1,0,0,0
+research,0,1,0,0,0
+respect,0,1,0,0,1
+restaurant,0,1,0,0,1
+Roast ,0,1,1,0,0
+roasting,0,1,0,1,0
+robotics,0,1,0,1,0
+rock climbing,0,1,1,1,1
+roll,0,1,0,1,0
+rowing,0,1,1,1,1
+rummage,0,1,0,1,1
+run,1,1,0,1,0
+sailing,0,1,1,1,1
+satellite,0,1,0,0,1
+scrapbooking,0,1,0,1,1
+scratch ,0,1,0,1,0
+scream,0,1,0,0,1
+Sculpt ,0,1,0,1,0
+sew,0,1,1,1,0
+shampoo,0,1,0,1,0
+shave,0,1,1,1,0
+Shine ,0,1,1,0,1
+shiver,0,1,0,0,0
+shoes,0,1,0,1,0
+Shooting,0,1,1,1,1
+shooting a gun,0,1,1,1,0
+shop,0,1,0,1,1
+shopping,0,1,0,1,0
+shorts,0,1,1,1,0
+shout,0,1,0,0,1
+shove,0,1,0,1,0
+shoveling,0,1,1,1,0
+shower,0,1,0,1,1
+shudder,0,1,0,0,1
+Shuffle ,0,1,0,1,0
+sigh,0,1,0,0,1
+simulation,0,1,0,0,0
+sing,0,1,0,0,1
+singing karaoke,0,1,0,0,1
+sink,0,1,0,1,0
+sipping,0,1,0,1,0
+sipping a straw,0,1,1,0,1
+sit,0,1,0,1,0
+ski,0,1,1,1,0
+Skiing ,0,1,1,1,1
+Skim(to remove something from the surface of a liquid),0,1,0,0,0
+skincare,0,1,0,1,0
+skip(skipping),0,1,0,1,0
+skirts,0,1,1,1,0
+skydiving,0,0,1,1,0
+sleep,0,1,0,0,0
+slide,0,1,0,1,0
+smell,0,0,0,0,1
+smile,0,1,0,0,1
+smile ,1,1,0,0,1
+smirk,0,1,0,0,1
+smoking,0,1,0,1,1
+snap,0,1,0,1,0
+snatch,0,1,0,1,0
+sneeze,0,1,0,1,0
+sniff,0,1,0,1,1
+snowboarding,0,1,1,0,0
+Snowboarding ,0,1,1,1,1
+soap,0,1,0,1,0
+software,0,1,0,0,0
+solar system,0,1,0,0,1
+solve,0,1,0,1,1
+Speaking,0,1,1,0,1
+speed,0,1,0,1,0
+spices,0,1,0,0,1
+Spill ,0,1,1,0,0
+spin,0,1,0,1,0
+spoon,0,1,0,1,0
+sportsmanship,0,1,0,0,1
+squeal,0,1,0,0,1
+squeeze,0,1,0,1,0
+stairs,0,1,0,1,0
+stamina,0,1,0,0,0
+stand,1,1,0,1,0
+star,0,1,1,0,0
+stare,0,1,1,0,0
+stomp,0,1,0,1,0
+stranger,0,1,0,0,1
+strategy,0,1,0,0,0
+strech,0,1,0,1,0
+strength,0,1,0,1,0
+student,0,1,0,0,1
+stumble,0,1,0,1,0
+sun,0,1,1,0,1
+support,0,1,0,0,1
+surfing,0,1,1,1,1
+swallow,0,1,0,1,0
+swim,1,1,0,1,0
+Swipe ,0,1,1,0,0
+table,0,1,0,1,0
+Tackle ,1,1,1,0,0
+tactics,0,1,0,0,0
+Taekwondo,0,1,1,1,1
+take a shower,0,1,0,1,0
+taking out trash,0,1,1,1,1
+talk,0,1,0,0,1
+taste,0,1,0,1,0
+teach,0,1,0,0,1
+teacher,0,1,0,0,1
+team,0,1,0,0,1
+teammate,0,1,0,0,1
+text,0,1,0,1,0
+theories,0,1,0,0,0
+think,0,1,0,0,0
+throw,1,1,0,1,0
+Tilt ,0,1,1,0,0
+toilet,0,1,0,1,0
+toilet paper,0,1,0,1,0
+toothbrush,0,1,0,1,0
+towel,0,1,0,1,0
+Trace ,0,1,1,0,0
+training,0,1,0,1,0
+travel,0,1,0,1,1
+Trim ,1,1,1,0,0
+trust,0,1,0,0,1
+turn,0,1,0,1,0
+twist,0,1,0,1,0
+twitch,0,1,0,1,0
+tying(laces),0,1,1,1,0
+vaping,0,1,0,1,1
+victory,0,1,0,0,1
+video games,0,1,1,1,0
+wail,0,1,0,0,1
+wardrobe,0,1,0,0,0
+wash dishes,0,1,1,1,1
+watch,0,0,1,1,0
+watching tv,0,1,1,0,0
+water,0,1,0,0,1
+water bottles,0,1,0,1,0
+watering plants,0,1,1,1,1
+weightlifting,0,1,1,1,1
+whimper,0,1,0,0,1
+whisper,0,1,0,0,1
+whistle,0,1,0,1,1
+wiggle,0,1,0,1,0
+wink,0,1,0,1,1
+Woodworking ,0,1,1,1,1
+working out,0,1,0,1,0
+write,0,1,0,0,0
+write ,0,1,1,1,0
+Writing an exam ,0,1,1,1,1
+yawn,0,1,0,1,1
+yelling,0,1,0,0,1
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,1,1,0,1,0
+,1,1,0,1,0
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,0,1,0,1,1
+,1,1,1,0,0
+,1,1,0,0,1
+,0,0,0,0,1
