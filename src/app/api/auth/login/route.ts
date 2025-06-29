@@ -16,10 +16,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user by email
-    const userResult = await query(
-      'SELECT id, name, email, password_hash, is_active FROM users WHERE email = $1',
-      [email]
-    );
+    let userResult;
+    try {
+      userResult = await query(
+        'SELECT id, name, email, password_hash, is_active FROM users WHERE email = $1',
+        [email]
+      );
+      console.log('Supabase user lookup result:', userResult);
+    } catch (dbError) {
+      console.error('Supabase user lookup error:', dbError);
+      return NextResponse.json({
+        success: false,
+        error: 'Database error during user lookup',
+        details: dbError instanceof Error ? dbError.message : dbError
+      }, { status: 500 });
+    }
 
     if (userResult.rows.length === 0) {
       return NextResponse.json({
