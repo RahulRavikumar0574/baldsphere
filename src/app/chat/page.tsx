@@ -65,7 +65,7 @@ export default function ChatPage() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Semantic matching function using Ollama
+  // Semantic matching function
   async function findBrainDataSemantic(userInput: string): Promise<{ 
     found: BrainDataItem | null; 
     normalized: string | null; 
@@ -236,7 +236,7 @@ Type any action to see which brain regions are involved!`;
     // Add loading message
     setMessages((prev) => [
       ...prev,
-      { sender: "assistant", text: " Analyzing your request... Please wait while I process this with AI semantic matching." }
+      { sender: "assistant", text: " Analyzing your request... Please wait while I process this with semantic matching." }
     ]);
 
     try {

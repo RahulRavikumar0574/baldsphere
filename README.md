@@ -75,14 +75,16 @@ npm install
 Create a `.env.local` file:
 
 ```env
-# Supabase Configuration
+# Supabase Configuration (Required)
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
-# Database Mode
-DB_MODE=supabase
+# Database Configuration (Optional)
+DATABASE_URL=your_database_url
 ```
+
+> **Note**: This project has been optimized for deployment without Python dependencies. All semantic matching is now handled client-side.
 
 ### 3. 🗄️ Database Setup
 
@@ -108,6 +110,25 @@ Visit `http://localhost:3000`
 npm run build
 npm start
 ```
+
+### 🚀 Deployment Platforms
+
+#### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in project settings
+3. Deploy automatically on push
+
+#### Netlify
+1. Connect your repository
+2. Build command: `npm run build`
+3. Publish directory: `.next`
+
+#### Railway
+1. Connect your repository
+2. Add environment variables
+3. Deploy with default settings
+
+> 📖 See `DEPLOYMENT.md` for detailed deployment instructions.
 
 ---
 
