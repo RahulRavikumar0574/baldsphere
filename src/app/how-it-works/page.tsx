@@ -7,46 +7,58 @@ const brainLobes = [
   {
     name: "Frontal Lobe",
     image: "/frontal.svg",
-    location: "Front part of the brain, behind the forehead",
-    functions: [
-      "Executive functions: planning, decision-making, problem-solving, judgment",
-      "Voluntary motor control: movement via the motor cortex",
-      "Speech production: via Broca's area (usually in the left hemisphere)",
-      "Personality and behavior: emotional regulation, social interaction",
-      "Working memory and attention control"
-    ]
+    location: "Front part of the brain, just behind your forehead",
+    mainRole: "The brain’s CEO - controls planning, movement, personality, and decision-making",
+    whatItDoes: [
+      "Controls voluntary movement via the motor cortex",
+      "Helps you make decisions, solve problems, and plan ahead",
+      "Turns thoughts into speech in the Broca area",
+      "Regulates emotions, reactions, and how you interact socially",
+      "Holds information temporarily",
+      "Helps suppress distractions"
+    ],
+    damageNote: "Damages in this region can alter personality"
   },
   {
     name: "Parietal Lobe",
     image: "/parietal.svg",
     location: "Upper middle part of the brain, behind the frontal lobe",
-    functions: [
-      "Processing sensory input: touch, pressure, temperature, pain",
-      "Spatial awareness and navigation",
-      "Perception of body position (proprioception)",
-      "Integration of sensory information from different modalities (visual, auditory, etc.)"
-    ]
+    mainRole: "The brain’s GPS and sensory interpreter - deals with touch, space, and movement",
+    whatItDoes: [
+      "Processes touch, pain, pressure, and temperature in the somatosensory cortex",
+      "Handles spatial orientation and navigation",
+      "Detects where your body is in space in terms of position and movement",
+      "Integrates info from senses to understand the surroundings",
+      "Left side handles math and logic; right side handles spatial coordination"
+    ],
+    damageNote: "Damage may cause clumsiness or trouble judging distance and space"
   },
   {
     name: "Temporal Lobe",
     image: "/temporal.svg",
     location: "Sides of the brain, near the ears",
-    functions: [
-      "Auditory processing: hearing and language comprehension",
-      "Memory formation: especially in the hippocampus",
-      "Understanding language: via Wernicke's area (usually left hemisphere)",
-      "Emotion processing: via the amygdala"
-    ]
+    mainRole: "The brain’s audio and emotional archive - handles hearing, memory, language, and feelings",
+    whatItDoes: [
+      "Processes sounds and language via the auditory cortex",
+      "Forms new long-term memories through the hippocampus",
+      "Understands speech via Wernicke’s area",
+      "Reads facial expressions and emotional tone through the amygdala",
+      "Connects senses with emotional meaning (e.g. a song tied to a memory)"
+    ],
+    damageNote: "Damage here can affect memory recall and language comprehension"
   },
   {
     name: "Occipital Lobe",
     image: "/occipital.svg",
     location: "Back of the brain",
-    functions: [
-      "Visual processing: interpreting visual information from the eyes",
-      "Recognition of shapes, colors, and motion",
-      "Visual-spatial processing"
-    ]
+    mainRole: "Your brain’s visual studio - interprets what your eyes see",
+    whatItDoes: [
+      "Decodes visual signals like shape, color, and motion",
+      "Helps recognize objects and faces",
+      "Sends information to other lobes for full perception",
+      "Essential for visual-spatial processing"
+    ],
+    damageNote: "Damage here may lead to visual hallucinations or difficulty recognizing visuals"
   }
 ];
 
@@ -91,16 +103,20 @@ export default function HowItWorksPage() {
 
                   {/* Text container */}
                   <div className="w-full md:w-1/2 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">{lobe.name}</h2>
-                    <p className="mb-3 text-gray-600">
-                      <strong className="text-gray-800"> Location:</strong> {lobe.location}
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{lobe.name}</h2>
+                    <p className="mb-1 text-gray-600">
+                      <strong className="text-gray-800">Location:</strong> {lobe.location}
                     </p>
-                    <h4 className="font-semibold text-gray-800 mb-2"> Main Functions:</h4>
-                    <ul className="list-disc pl-6 space-y-1 text-gray-700">
-                      {lobe.functions.map((fn, i) => (
+                    <p className="mb-3 text-gray-700 italic">
+                      <strong className="text-gray-800">Main Role:</strong> {lobe.mainRole}
+                    </p>
+                    <h4 className="font-semibold text-gray-800 mb-2">What it does:</h4>
+                    <ul className="list-disc pl-6 space-y-1 text-gray-700 mb-2">
+                      {lobe.whatItDoes.map((fn, i) => (
                         <li key={i}>{fn}</li>
                       ))}
                     </ul>
+                    <p className="text-red-600 font-medium mt-2">{lobe.damageNote}</p>
                   </div>
                 </div>
               ))}
