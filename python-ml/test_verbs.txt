@@ -1,0 +1,7 @@
+smooching,kiss
+punching,jab
+gazing,look
+mummifying,mummify
+staring,look
+kneeling,kneel
+jogging,run

@@ -94,17 +94,35 @@ export default function ChatPage() {
       const data = await response.json();
       
       if (data.success && data.data.normalized) {
-        // Find the brain data item for the normalized word
-        const found = (brainData as BrainDataItem[]).find(
-          (item) => item.keyword.toLowerCase() === data.data.normalized.toLowerCase()
-        );
-        
-        return {
-          found: found || null,
-          normalized: data.data.normalized,
-          confidence: data.data.confidence,
-          brainRegions: data.data.brainRegions || (found?.region || [])
-        };
+        // If flask: true, synthesize a found object for ML backend
+        if (data.data.flask) {
+          // Convert brainRegions object to array of region names where value is 1/truthy
+          let brainRegionsArr: string[] = [];
+          if (data.data.brainRegions && typeof data.data.brainRegions === 'object' && !Array.isArray(data.data.brainRegions)) {
+            brainRegionsArr = Object.entries(data.data.brainRegions)
+              .filter(([_, val]) => !!val)
+              .map(([key]) => key.charAt(0).toUpperCase() + key.slice(1));
+          } else if (Array.isArray(data.data.brainRegions)) {
+            brainRegionsArr = data.data.brainRegions;
+          }
+          return {
+            found: { keyword: data.data.normalized },
+            normalized: data.data.normalized,
+            confidence: data.data.confidence,
+            brainRegions: brainRegionsArr
+          };
+        } else {
+          // original local logic
+          const found = (brainData as BrainDataItem[]).find(
+            (item) => item.keyword.toLowerCase() === data.data.normalized.toLowerCase()
+          );
+          return {
+            found: found || null,
+            normalized: data.data.normalized,
+            confidence: data.data.confidence,
+            brainRegions: data.data.brainRegions || (found?.region || [])
+          };
+        }
       }
 
       return { found: null, normalized: null, confidence: 'none', brainRegions: [] };
@@ -250,13 +268,17 @@ Type any action to see which brain regions are involved!`;
       }
 
       let assistantResponse: string;
-      
-      if (found) {
+      // Convert confidence to number if possible
+      let confNum = typeof confidence === 'string' && !isNaN(Number(confidence)) ? Number(confidence) : confidence;
+      // If confidence is a number and low, show fallback message
+      if (found && Array.isArray(brainRegions) && confNum !== undefined && typeof confNum === 'number' && confNum < 0.7) {
+        assistantResponse = `Sorry, I couldn't confidently match "${userInput}" to a known action. Please try a different word or check your spelling.`;
+      } else if (found) {
         const regionText = brainRegions.join(" & ");
         const confidenceText = confidence === 'high' ? ' (exact match)' : 
                               confidence === 'medium' ? ' (semantic match)' : 
-                              confidence === 'fallback' ? ' (fallback match)' : '';
-        
+                              confidence === 'fallback' ? ' (fallback match)' :
+                              (typeof confNum === 'number' ? ` (confidence: ${confNum})` : '');
         assistantResponse = `The ${regionText} lobe${brainRegions.length > 1 ? 's' : ''} are responsible for "${normalized || found.keyword}"${confidenceText}.`;
       } else {
         assistantResponse = `Sorry, I don't have data for "${userInput}". Try typing "help" to see examples, or try words like 'think', 'run', 'sing', 'dance', 'read', 'write', or 'listen'.`;

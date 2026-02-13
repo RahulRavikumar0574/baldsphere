@@ -1,0 +1,12 @@
+# Ignore files not needed by Elastic Beanstalk
+.git
+.gitignore
+.next/cache
+node_modules
+npm-debug.log
+.DS_Store
+*.log
+coverage
+.env*
+python-ml/
+__pycache__/
