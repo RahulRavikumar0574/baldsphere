@@ -1,15 +1,11 @@
 import type { NextConfig } from "next";
 
+// Vercel deployment with dynamic API routes – do NOT use static export.
 const nextConfig: NextConfig = {
-  /* config options here */
-  eslint: {
-    // Disable ESLint during builds to allow deployment
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    // Disable TypeScript errors during builds to allow deployment
-    ignoreBuildErrors: true,
-  },
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+  // If you use next/image:
+  // images: { unoptimized: true },
 };
 
 export default nextConfig;

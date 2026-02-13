@@ -248,16 +248,45 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Use client-side semantic matching
+    // Try calling the python-ml Flask API first
+    try {
+      const flaskRes = await fetch('http://localhost:5000/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ verb: userInput })
+      });
+
+      if (flaskRes.ok) {
+        const flaskData = await flaskRes.json();
+        return NextResponse.json({
+          success: true,
+          data: {
+            original: userInput,
+            normalized: flaskData.closest_match || flaskData.input || null,
+            brainRegions: flaskData.brain_regions || [],
+            confidence: flaskData.similarity !== undefined ? flaskData.similarity.toFixed(2) : 'unknown',
+            flask: true
+          }
+        });
+      } else {
+        // If Flask returns error, fallback
+        console.warn('Flask API error:', flaskRes.status);
+      }
+    } catch (err) {
+      // If Flask is unreachable, fallback
+      console.warn('Flask API unreachable, falling back to local matcher. Error:', err);
+    }
+
+    // Fallback to local semantic matcher
     const result = findSemanticMatch(userInput);
-    
     return NextResponse.json({
       success: true,
       data: {
         original: userInput,
         normalized: result.normalized,
         brainRegions: result.brainRegions,
-        confidence: result.confidence
+        confidence: result.confidence,
+        flask: false
       }
     });
 
@@ -292,3 +321,4 @@ export async function GET(request: NextRequest) {
     }, { status: 500 });
   }
 }
+
